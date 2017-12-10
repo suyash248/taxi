@@ -17,6 +17,7 @@ app.register_blueprint (driver)
 app.register_blueprint (customer)
 app.register_blueprint (dashboard)
 
+from models.models import *
 @app.route('/')
 def index():
     return 'Welcome to taxi service!'
