@@ -17,6 +17,9 @@ class Request(db.Model):
     picked_up = db.Column(db.DateTime, nullable=True)
     completed_at = db.Column(db.DateTime, nullable=True)
 
+    # loc_x = db.Column(db.Integer, nullable=False)
+    # loc_y = db.Column(db.Integer, nullable=False)
+
     def __init__(self, customer_id):
         self.customer_id = customer_id
 

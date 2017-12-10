@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert2@7.0.9/dist/sweetalert2.all.js"></script>
 
     <script src="/static/timeago.js"></script>
     <script type="text/javascript">
@@ -42,10 +43,18 @@
             driver_id = driver_id || getParameterByName('id', location.href);
             var url = '/driver/serve/' + driver_id + '/' + request_id;
             $.get(url, function(res) {
-                if(res.status == 'success') {
-                    $('#waiting-link').click();
+                    swal({
+                          title: res.status,
+                          text: res.message,
+                          type: res.status,
+                          confirmButtonColor: '#3085d6',
+                          confirmButtonText: 'Refresh'
+                        }).then(function(result) {
+                          if (result.value) {
+                            $('#waiting-link').click();
+                          }
+                    });
                     console.log(res.status + '! ' + res.message);
-                }
             });
             return false;
         }

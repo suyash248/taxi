@@ -8,6 +8,13 @@ class Config(object):
     CSRF_ENABLED = True
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/taxi"
     RIDE_COMPLETION_DURATION_IN_SEC = 300
+    DRIVER_THRESHOLD = 5
+    REDIS = {
+        "HOST": "localhost",
+        "PORT": 6379,
+        "DB": 0,
+        "PASSWORD": None
+    }
 
 class ProductionConfig(Config):
     DEBUG = False

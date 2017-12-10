@@ -32,14 +32,19 @@ def get_requests_by_status(status=ReqStatus.WAITING,driver_id=None):
 def serve_request(driver_id, request_id):
     from services.taxi_scheduler import schedule
     from taxi import app
+
     try:
         updated_args = {
             "req_status": ReqStatus.ONGOING,
             "driver_id": driver_id,
             "picked_up": datetime.utcnow()
         }
-        request = Request.filter_and_update(filter_args={"id": request_id}, updated_args=updated_args)
-        schedule(app.config['RIDE_COMPLETION_DURATION_IN_SEC'], complete_ride, (request_id,))
+        request = Request.filter_and_update(filter_args={"id": request_id, "req_status": ReqStatus.WAITING}, updated_args=updated_args)
+        if request:
+            schedule(app.config['RIDE_COMPLETION_DURATION_IN_SEC'], complete_ride, (request_id,))
+        else:
+            res = {"status": "warning", "message": "No such request found or request may already be selected/served."}
+            return res
     except Exception as e:
         print e
         res = {"status": "error", "message": "Couldn't serve request."}
@@ -58,5 +63,27 @@ def complete_ride(request_id):
     }
     Request.filter_and_update(filter_args={"id": request_id}, updated_args=updated_args)
 
+def validate_and_register_driver(driver_id):
+    if is_driver_exist(driver_id):
+        return True
+    else:
+        if not is_driver_threshold_reached():
+            register_driver(driver_id)
+            return True
+        return False
 
 
+def is_driver_threshold_reached():
+    from redisutil import redis_connection
+    from taxi import app
+    driver_count = redis_connection.get('TAXI_DRIVER_COUNT') or 0
+    return int(driver_count) >= app.config['DRIVER_THRESHOLD']
+
+def register_driver(driver_id):
+    from redisutil import redis_connection
+    redis_connection.sadd('TAXI_DRIVERS', driver_id)
+    redis_connection.incr('TAXI_DRIVER_COUNT')
+
+def is_driver_exist(driver_id):
+    from redisutil import redis_connection
+    return redis_connection.sismember('TAXI_DRIVERS', driver_id)

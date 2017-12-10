@@ -14,19 +14,25 @@ def home():
         return "Unknown driver"
     from models.request import ReqStatus
     requests = []
-    if req_status == ReqStatus.WAITING.name:
-        requests = taxi_service.get_requests_by_status(req_status)
+    if taxi_service.validate_and_register_driver(driver_id):
+        if req_status == ReqStatus.WAITING.name:
+            requests = taxi_service.get_requests_by_status(req_status)
+        else:
+            requests = taxi_service.get_requests_by_status(req_status, driver_id)
+
+        template = 'driver/driver.html'
+        if xhr:
+            template = 'driver/{req_status}.html'.format(req_status=req_status.lower())
+        return render_template(template, data=requests)
     else:
-        requests = taxi_service.get_requests_by_status(req_status, driver_id)
-
-    template = 'driver/driver.html'
-    if xhr:
-        template = 'driver/{req_status}.html'.format(req_status=req_status.lower())
-
-    return render_template(template, data=requests)
+        return "Driver(s) limit exceeded!"
 
 @driver.route('/driver/serve/<driver_id>/<request_id>')
 def serve(driver_id, request_id):
     from services import taxi_service
-    res = taxi_service.serve_request(driver_id, request_id)
-    return json_response(res)
+    if not taxi_service.validate_and_register_driver(driver_id):
+        from services import taxi_service
+        res = taxi_service.serve_request(driver_id, request_id)
+        return json_response(res)
+    else:
+        return json_response({"status": "error", "message": "Driver(s) limit exceeded."})
