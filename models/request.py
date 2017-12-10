@@ -14,6 +14,8 @@ class Request(db.Model):
     driver_id = db.Column(db.String, nullable=True)
     req_status = db.Column(db.Enum(ReqStatus), default=ReqStatus.WAITING)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    picked_up = db.Column(db.DateTime, nullable=True)
+    completed_at = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, customer_id):
         self.customer_id = customer_id
@@ -25,8 +27,11 @@ class Request(db.Model):
     @classmethod
     def all(cls):
         return db.session.query(cls).all()
-    # def __repr__(self):
-    #     return
+
+    @classmethod
+    def filter(cls, filter_args=None):
+        res = db.session.query(cls).filter_by(**filter_args)
+        return res
 
     def as_dict(self):
         return {
@@ -35,6 +40,7 @@ class Request(db.Model):
             "driver_id": self.driver_id,
             "req_status": str(self.req_status.name),
             "created_at": self.created_at.isoformat()+'Z',
-            "time_elapsed": "NA"
+            "picked_up": self.picked_up.isoformat()+'Z' if self.picked_up is not None else None,
+            "completed_at": self.completed_at.isoformat()+'Z' if self.completed_at is not None else None
         }
 

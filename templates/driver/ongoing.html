@@ -1,0 +1,25 @@
+<h3>Ongoing</h3>
+<table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Request Id</th>
+        <th>Customer Id</th>
+        <th>Request Time</th>
+        <th>Picked up</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for data in data %}
+            <tr>
+                <td>{{data.request_id}}</td>
+                <td>{{data.customer_id}}</td>
+                <td>
+                    <abbr class="timeago" title="{{data.created_at}}">{{data.created_at}}</abbr>
+                </td>
+                <td>
+                    <abbr class="timeago" title="{{data.picked_up}}">{{data.picked_up}}</abbr>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>

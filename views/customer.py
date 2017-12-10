@@ -1,6 +1,5 @@
 import json
 from flask import Blueprint, request, render_template
-from services import taxi_service
 from services.commons import json_response
 
 # Register routes blueprint
@@ -12,6 +11,7 @@ def home():
 
 @customer.route('/ride', methods=['POST'])
 def ride():
+    from services import taxi_service
     customer_id = request.form['customer_id']
     print "Customer Id", customer_id
     res = taxi_service.ride(customer_id)

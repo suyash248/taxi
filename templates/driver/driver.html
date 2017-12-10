@@ -8,6 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script src="/static/timeago.js"></script>
+    <script type="text/javascript">
+
+        var init_tab_data = function() {
+            $('a.status-tab-link').click(function(e) {
+                var $this = $(this),
+                    target_elt = $this.attr('href'),
+                    req_status = $this.attr('data-status');
+
+                var url = location.href + '&xhr=1&req_status=' + req_status;
+                $.get(url, function(data) {
+                    $(target_elt).html(data);
+                    jQuery(".timeago").timeago();
+                });
+
+                $this.tab('show');
+                //return false;
+            });
+        }
+
+        jQuery(document).ready(function() {
+          jQuery(".timeago").timeago();
+          init_tab_data();
+          $('#waiting-link').click();
+        });
+    </script>
     <!--
     Bootstrap 4
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -20,24 +46,21 @@
 <body class="col-md-offset-1 col-md-10 col-md-offset-1">
     <h1>Driver</h1>
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#waiting">Waiting</a></li>
-      <li><a data-toggle="tab" href="#ongoing">Ongoing</a></li>
-      <li><a data-toggle="tab" href="#completed">Completed</a></li>
+    <ul class="nav nav-tabs status-tabs">
+      <li><a id="waiting-link" class="status-tab-link" data-toggle="tab" href="#waiting" data-status="WAITING">Waiting</a></li>
+      <li><a id="ongoing-link" class="status-tab-link" data-toggle="tab" href="#ongoing" data-status="ONGOING">Ongoing</a></li>
+      <li><a id="completed-link" class="status-tab-link" data-toggle="tab" href="#completed" data-status="COMPLETED">Completed</a></li>
     </ul>
 
     <div class="tab-content">
       <div id="waiting" class="tab-pane fade in active">
-        <h3>Waiting</h3>
-        <p>Waiting requests</p>
+
       </div>
       <div id="ongoing" class="tab-pane fade">
-        <h3>Ongoing</h3>
-        <p>Ongoing requests</p>
+
       </div>
       <div id="completed" class="tab-pane fade">
-        <h3>Completed</h3>
-        <p>Completed requests</p>
+
       </div>
     </div>
 
