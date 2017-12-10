@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+*.pyc
+environment
+.environment
+settings.py
+*.lprof
+*.swp
+page
