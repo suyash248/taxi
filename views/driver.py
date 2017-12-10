@@ -23,5 +23,11 @@ def home():
     if xhr:
         template = 'driver/{req_status}.html'.format(req_status=req_status.lower())
 
-    print "Template.....", template
     return render_template(template, data=requests)
+
+@driver.route('/driver/serve/<driver_id>/<request_id>')
+def serve(driver_id, request_id):
+    from services import taxi_service
+    print driver_id, request_id
+    res = taxi_service.serve_request(driver_id, request_id)
+    return json_response(res)

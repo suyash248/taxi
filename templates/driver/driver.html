@@ -28,6 +28,28 @@
             });
         }
 
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var serve_request = function (request_id, driver_id) {
+            driver_id = driver_id || getParameterByName('id', location.href);
+            var url = '/driver/serve/' + driver_id + '/' + request_id;
+            $.get(url, function(res) {
+                if(res.status == 'success') {
+                    $('#waiting-link').click();
+                    console.log(res.status + '! ' + res.message);
+                }
+            });
+            return false;
+        }
+
         jQuery(document).ready(function() {
           jQuery(".timeago").timeago();
           init_tab_data();

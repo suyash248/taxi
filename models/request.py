@@ -29,8 +29,18 @@ class Request(db.Model):
         return db.session.query(cls).all()
 
     @classmethod
+    def by_id(cls, id):
+        return db.session.query(cls).get(id)
+
+    @classmethod
     def filter(cls, filter_args=None):
         res = db.session.query(cls).filter_by(**filter_args)
+        return res
+
+    @classmethod
+    def filter_and_update(cls, filter_args=None, updated_args=None):
+        res = db.session.query(cls).filter_by(**filter_args).update(updated_args)
+        db.session.commit()
         return res
 
     def as_dict(self):

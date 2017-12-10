@@ -17,7 +17,7 @@
                 <abbr class="timeago" title="{{data.created_at}}">{{data.created_at}}</abbr>
             </td>
             <td>
-                <a href="/dashboard" class="btn btn-success" style="margin-bottom: 10px">Select</a>
+                <a href="javascript:void(0)" class="btn btn-success serve-request" onclick="serve_request({{ data.request_id }})" style="margin-bottom: 10px">Select</a>
             </td>
         </tr>
     {% endfor %}
