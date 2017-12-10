@@ -30,7 +30,7 @@ def home():
 @driver.route('/driver/serve/<driver_id>/<request_id>')
 def serve(driver_id, request_id):
     from services import taxi_service
-    if not taxi_service.validate_and_register_driver(driver_id):
+    if taxi_service.validate_and_register_driver(driver_id):
         from services import taxi_service
         res = taxi_service.serve_request(driver_id, request_id)
         return json_response(res)
