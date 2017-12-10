@@ -34,7 +34,7 @@ class Request(db.Model):
             "customer_id": self.customer_id,
             "driver_id": self.driver_id,
             "req_status": str(self.req_status.name),
-            "created_at": self.created_at,
+            "created_at": self.created_at.isoformat()+'Z',
             "time_elapsed": "NA"
         }
 

@@ -11,7 +11,7 @@
 
     <script type="text/javascript">
         jQuery(document).ready(function() {
-          jQuery("time.timeago").timeago();
+          jQuery(".timeago").timeago();
         });
     </script>
 </head>
@@ -35,8 +35,7 @@
                         <td>{{data.request_id}}</td>
                         <td>{{data.customer_id}}</td>
                         <td>
-                            <time class="timeago" datetime="{{data.created_at}}">{{data.time_elapsed}}</time>
-
+                            <abbr class="timeago" title="{{data.created_at}}">{{data.created_at}}</abbr>
                         </td>
                         <td>{{data.req_status}}</td>
                         <td>{{data.driver_id}}</td>
