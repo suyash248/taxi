@@ -51,6 +51,7 @@ def serve_request(driver_id, request_id):
     return res
 
 def complete_ride(request_id):
+    print "Going to mark the ride with request id {request_id} as COMPLETED".format(request_id=request_id)
     updated_args = {
         "req_status": ReqStatus.COMPLETED,
         "completed_at": datetime.utcnow()
