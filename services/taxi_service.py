@@ -30,6 +30,8 @@ def get_requests_by_status(status=ReqStatus.WAITING,driver_id=None):
     return map(lambda r: r.as_dict(), requests)
 
 def serve_request(driver_id, request_id):
+    from services.taxi_scheduler import schedule
+    from taxi import app
     try:
         updated_args = {
             "req_status": ReqStatus.ONGOING,
@@ -37,6 +39,7 @@ def serve_request(driver_id, request_id):
             "picked_up": datetime.utcnow()
         }
         request = Request.filter_and_update(filter_args={"id": request_id}, updated_args=updated_args)
+        schedule(app.config['RIDE_COMPLETION_DURATION_IN_SEC'], complete_ride, (request_id,))
     except Exception as e:
         print e
         res = {"status": "error", "message": "Couldn't serve request."}
@@ -46,6 +49,13 @@ def serve_request(driver_id, request_id):
         "message": "Accepted request successfully."
     }
     return res
+
+def complete_ride(request_id):
+    updated_args = {
+        "req_status": ReqStatus.COMPLETED,
+        "completed_at": datetime.utcnow()
+    }
+    Request.filter_and_update(filter_args={"id": request_id}, updated_args=updated_args)
 
 
 

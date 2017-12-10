@@ -7,7 +7,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/taxi"
-
+    RIDE_COMPLETION_DURATION_IN_SEC = 300
 
 class ProductionConfig(Config):
     DEBUG = False

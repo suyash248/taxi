@@ -28,6 +28,5 @@ def home():
 @driver.route('/driver/serve/<driver_id>/<request_id>')
 def serve(driver_id, request_id):
     from services import taxi_service
-    print driver_id, request_id
     res = taxi_service.serve_request(driver_id, request_id)
     return json_response(res)
