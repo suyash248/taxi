@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
 # Register routes blueprint
-driver = Blueprint ('metar', __name__)
+driver = Blueprint ('driver', __name__)
 
 @driver.route('/driverapp')
 def home():

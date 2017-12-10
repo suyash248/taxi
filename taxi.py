@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from views.driver import driver
+from views.customer import customer
 
 app = Flask(__name__)
 # set env variable as - export APP_SETTINGS="config.DevelopmentConfig"
@@ -12,6 +13,7 @@ db = SQLAlchemy(app)
 
 # Routes -> Views blueprints
 app.register_blueprint (driver)
+app.register_blueprint (customer)
 
 @app.route('/')
 def index():
