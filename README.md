@@ -52,21 +52,21 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 
 #### Customer app - 
 
-A. It can be accessed via ```{host}:{port}/customerapp```.
-B. Customer can make any number of requests to ride. Customer needs to enter ```customer_id``` while making the request, ```customer_id``` can be string/integer.
+* It can be accessed via ```{host}:{port}/customerapp```.
+* Customer can make any number of requests to ride. Customer needs to enter ```customer_id``` while making the request, ```customer_id``` can be string/integer.
 
 #### Driver app - 
 
-A. It can be accessed via ```{host}:{port}/driverapp?id=<driver_id>```. Where ```id``` is driver's id & it can be string/integer.
-B. Driver app contains three tabs -
+* It can be accessed via ```{host}:{port}/driverapp?id=<driver_id>```. Where ```id``` is driver's id & it can be string/integer.
+* Driver app contains three tabs -
  (i) Waiting - Shows all the ```waiting``` request(s) that needs to be served. Driver can choose to serve any request from here.
  (ii) Ongoing - Shows the ```ongoing``` request(s) that are being served currently by this driver(```<driver_id>```).
  (iii) Completed - Shows the ```completed``` request(s) that are served in the past by this driver(```<driver_id>```).
 
 #### Dashboard app - 
 
-A. It can be accessed via ```{host}:{port}/dashboard```.
-B. It shows all the request(s) along with their status, driver_id, customer_id, picked_up time, request_creation_time, completion_time etc.
+* It can be accessed via ```{host}:{port}/dashboard```.
+* It shows all the request(s) along with their status, driver_id, customer_id, picked_up time, request_creation_time, completion_time etc.
 
 ### Assumption - 
 
