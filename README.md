@@ -81,3 +81,23 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 > A customer can make any number of rides.
 
 > A ride will automatically be completed in 5 minutes. It can be configured under ```config.py``` as ```RIDE_COMPLETION_DURATION_IN_SEC```.
+
+### Application Overview - 
+
+#### Overview
+
+![alt text](https://github.com/suyash248/taxi/blob/master/static/images/architecture/ovierview.jpg "Overview")
+
+#### Driver app
+
+![alt text](https://github.com/suyash248/taxi/blob/master/static/images/architecture/driver.jpg "Driver app")
+
+#### Customer app
+
+![alt text](https://github.com/suyash248/taxi/blob/master/static/images/architecture/customer.jpg "Customer app")
+
+#### Dashboard
+
+![alt text](https://github.com/suyash248/taxi/blob/master/static/images/architecture/dashboard.jpg "Dashboard")
+
+
