@@ -60,9 +60,9 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 
 * It can be accessed via ```{host}:{port}/driverapp?id=<driver_id>```. Where ```id``` is driver's id & it can be string/integer.
 * Driver app contains three tabs -
- * Waiting - Shows all the ```waiting``` request(s) that needs to be served. Driver can choose to serve any request from here.
- * Ongoing - Shows the ```ongoing``` request(s) that are being served currently by this driver(```<driver_id>```).
- * Completed - Shows the ```completed``` request(s) that are served in the past by this driver(```<driver_id>```).
+> Waiting - Shows all the ```waiting``` request(s) that needs to be served. Driver can choose to serve any request from here.
+> Ongoing - Shows the ```ongoing``` request(s) that are being served currently by this driver(```<driver_id>```).
+> Completed - Shows the ```completed``` request(s) that are served in the past by this driver(```<driver_id>```).
 
 #### Dashboard app - 
 
