@@ -68,7 +68,7 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 * It can be accessed via ```{host}:{port}/dashboard```.
 * It shows all the request(s) along with their status, driver_id, customer_id, picked_up time, request_creation_time, completion_time etc.
 
-### Assumption - 
+### Assumptions - 
 
 > There will be only 5 drivers. It can be configured under ```config.py``` as ```DRIVER_THRESHOLD```.
 
