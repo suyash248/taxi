@@ -1,4 +1,4 @@
-# taxi - Basic cab/taxi booking app
+# TAXI - Basic cab/taxi booking app
 
 ### Requirements
 Python 2.7+, pip, Redis, postgreSQL
@@ -51,10 +51,25 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 
 ### Applications & Endpoints
 
-- There are three applications. ```Customer app```, ```Driver app``` and ```Dashboard app```
+> There are three applications. ```Customer app```, ```Driver app``` and ```Dashboard app```
 
-> Assumption: Assuming that metar endpoint will return reponse in foillowing format - 
-1. There will be only 5 drivers. It can be configured under ```config.py``` as ```DRIVER_THRESHOLD```.
-2. All the drivers are available all the time but they can serve one request at a time.
-3. A customer can make any number of rides.
-4. A ride will automatically be completed in 5 minutes. It can be configured under ```config.py``` as ```RIDE_COMPLETION_DURATION_IN_SEC```.
+#### Customer app - 
+A. It can be accessed via ```{host}:{port}/customerapp```.
+B. Customer can make any number of requests to ride. Customer needs to enter ```customer_id``` while making the request, ```customer_id``` can be string/integer.
+
+#### Driver app - 
+A. It can be accessed via ```{host}:{port}/driverapp?id=<driver_id>```. Where ```id``` is driver's id & it can be string/integer.
+B. Driver app contains three tabs -
+ (i) Waiting - Shows all the ```waiting``` request(s) that needs to be served. Driver can choose to serve any request from here.
+ (ii) Ongoing - Shows the ```ongoing``` request(s) that are being served currently by this driver(```<driver_id>```).
+ (iii) Completed - Shows the ```completed``` request(s) that are served in the past by this driver(```<driver_id>```).
+
+#### Dashboard app - 
+A. It can be accessed via ```{host}:{port}/dashboard```.
+B. It shows all the request(s) along with their status, driver_id, customer_id, picked_up time, request_creation_time, completion_time etc.
+
+### Assumption: 
+> There will be only 5 drivers. It can be configured under ```config.py``` as ```DRIVER_THRESHOLD```.
+> All the drivers are available all the time but they can serve one request at a time.
+> A customer can make any number of rides.
+> A ride will automatically be completed in 5 minutes. It can be configured under ```config.py``` as ```RIDE_COMPLETION_DURATION_IN_SEC```.
