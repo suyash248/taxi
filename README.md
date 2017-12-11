@@ -15,8 +15,9 @@ $ source .environment/bin/activate
 
 2. Edit configuration under ```config.py```. i.e. provide configuration/settings related to DBs(PostgreSQL, Redis) and other constants. And depending upon the environment(Development, Staging, Testing, 
 Production) set environment variable as - 
+
 ```sh
-export APP_SETTINGS=config.DevelopmentConfig # For ```Development``` mode.
+$ export APP_SETTINGS=config.DevelopmentConfig # For ```Development``` mode.
 ```
 
 3. Add project to ```PYTHONPATH``` as 
