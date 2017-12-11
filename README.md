@@ -19,28 +19,25 @@ Production) set environment variable as -
 export APP_SETTINGS=config.DevelopmentConfig # For ```Development``` mode.
 ```
 
-#### PostgreSQL configuration - 
-Database - taxi
-
 3. Add project to ```PYTHONPATH``` as 
 
 ```sh 
 $ export PYTHONPATH="$PYTHONPATH:." # . corresponds to current directory(project-dir)
 ```
 
-3. Under ```<project-dir>``` install requirements/dependencies as 
+4. Under ```<project-dir>``` install requirements/dependencies as 
 
 ```sh 
 $ pip install -r requirements.txt
 ```
 
-4. Then run ```app.py``` as  
+5. Then run ```app.py``` as  
 
 ```sh
 $ python app.py
 ```
 
-5. Run postgreSQL migrations as - 
+6. Run postgreSQL migrations as - 
 ```sh
 $ python manage.py db init    # Only once.
 $ python manage.py db migrate # Every time, in order to generate new migration.
@@ -54,10 +51,12 @@ $ python manage.py db upgrade # Every time, when migration(s) needs to be applie
 > There are three applications. ```Customer app```, ```Driver app``` and ```Dashboard app```
 
 #### Customer app - 
+
 A. It can be accessed via ```{host}:{port}/customerapp```.
 B. Customer can make any number of requests to ride. Customer needs to enter ```customer_id``` while making the request, ```customer_id``` can be string/integer.
 
 #### Driver app - 
+
 A. It can be accessed via ```{host}:{port}/driverapp?id=<driver_id>```. Where ```id``` is driver's id & it can be string/integer.
 B. Driver app contains three tabs -
  (i) Waiting - Shows all the ```waiting``` request(s) that needs to be served. Driver can choose to serve any request from here.
@@ -65,11 +64,16 @@ B. Driver app contains three tabs -
  (iii) Completed - Shows the ```completed``` request(s) that are served in the past by this driver(```<driver_id>```).
 
 #### Dashboard app - 
+
 A. It can be accessed via ```{host}:{port}/dashboard```.
 B. It shows all the request(s) along with their status, driver_id, customer_id, picked_up time, request_creation_time, completion_time etc.
 
-### Assumption: 
+### Assumption - 
+
 > There will be only 5 drivers. It can be configured under ```config.py``` as ```DRIVER_THRESHOLD```.
+
 > All the drivers are available all the time but they can serve one request at a time.
+
 > A customer can make any number of rides.
+
 > A ride will automatically be completed in 5 minutes. It can be configured under ```config.py``` as ```RIDE_COMPLETION_DURATION_IN_SEC```.
