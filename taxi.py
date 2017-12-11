@@ -4,14 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from views.driver import driver
 from views.customer import customer
 from views.dashboard import dashboard
-import sched, time
 
 app = Flask(__name__)
-# set env variable as - export APP_SETTINGS="config.DevelopmentConfig"
+# set env variable as - export APP_SETTINGS="config.DevelopmentConfig" for "Development" mode.
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 # SqlAlchemy initialization
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pre-registration'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

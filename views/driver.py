@@ -5,11 +5,16 @@ driver = Blueprint ('driver', __name__)
 
 @driver.route('/driverapp')
 def home():
+    """
+    Starting point/homepage for the driver app.
+    :return:
+    """
     from services import taxi_service
     from models.request import ReqStatus
     req_status = request.args.get('req_status', ReqStatus.WAITING)
     driver_id = request.args.get('id')
     xhr = request.args.get('xhr', False)
+
     if driver_id is None:
         return "Unknown driver"
     from models.request import ReqStatus
@@ -29,6 +34,12 @@ def home():
 
 @driver.route('/driver/serve/<driver_id>/<request_id>')
 def serve(driver_id, request_id):
+    """
+    Endpoint responsible for serving/selecting a request which is in waiting state.
+    :param driver_id:
+    :param request_id:
+    :return:
+    """
     from services import taxi_service
     if taxi_service.validate_and_register_driver(driver_id):
         from services import taxi_service

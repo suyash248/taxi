@@ -3,6 +3,9 @@ import datetime
 import enum
 
 class ReqStatus(enum.Enum):
+    """
+    Enum for request status.
+    """
     WAITING = "WAITING"
     ONGOING = "ONGOING"
     COMPLETED = "COMPLETED"
@@ -37,16 +40,31 @@ class Request(db.Model):
 
     @classmethod
     def filter(cls, filter_args=None):
+        """
+        Filters and returns record(s)
+        :param filter_args: dict, having filter criteria for fetching records.
+        :return: list of records
+        """
         res = db.session.query(cls).filter_by(**filter_args)
         return res
 
     @classmethod
     def filter_and_update(cls, filter_args=None, updated_args=None):
+        """
+        Filters records and updates them.
+        :param filter_args: dict, having filter criteria for fetching records.
+        :param updated_args: dict containing values to be changed.
+        :return: Number of records that were updated.
+        """
         res = db.session.query(cls).filter_by(**filter_args).update(updated_args)
         db.session.commit()
         return res
 
     def as_dict(self):
+        """
+        Converts ```Request``` object to it's corresponding json structure.
+        :return:
+        """
         return {
             "request_id": self.id,
             "customer_id": self.customer_id,
