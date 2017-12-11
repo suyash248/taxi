@@ -9,20 +9,20 @@ import sched, time
 app = Flask(__name__)
 # set env variable as - export APP_SETTINGS="config.DevelopmentConfig"
 app.config.from_object(os.environ['APP_SETTINGS'])
+
+# SqlAlchemy initialization
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pre-registration'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 # Routes -> Views blueprints
 app.register_blueprint (driver)
 app.register_blueprint (customer)
 app.register_blueprint (dashboard)
 
-
-
-
-taxi_scheduler = sched.scheduler(time.time, time.sleep)
-
+# Registering models
 from models.models import *
+
 @app.route('/')
 def index():
     return 'Welcome to taxi service!'
