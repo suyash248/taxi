@@ -20,6 +20,8 @@ Production) set environment variable as -
 $ export APP_SETTINGS=config.DevelopmentConfig # For ```Development``` mode.
 ```
 
+> If you are using PyCharm then environment variables can be specified under `run configuration`.
+
 3. Add project to ```PYTHONPATH``` as 
 
 ```sh 
@@ -32,10 +34,10 @@ $ export PYTHONPATH="$PYTHONPATH:." # . corresponds to current directory(project
 $ pip install -r requirements.txt
 ```
 
-5. Then run ```app.py``` as  
+5. Then run ```taxi.py``` as  
 
 ```sh
-$ python app.py
+$ python taxi.py
 ```
 
 6. Run postgreSQL migrations as - 
