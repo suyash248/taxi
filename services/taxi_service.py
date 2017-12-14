@@ -90,6 +90,7 @@ def complete_ride(request_id):
     }
     Request.filter_and_update(filter_args={"id": request_id}, updated_args=updated_args)
 
+
 def validate_and_register_driver(driver_id):
     """
     Checks if it's an existing driver, otherwise creates a new driver entry in redis if ```DRIVER_THRESHOLD```
@@ -115,6 +116,7 @@ def is_driver_threshold_reached():
     driver_count = redis_connection.get('TAXI_DRIVER_COUNT') or 0
     return int(driver_count) >= app.config['DRIVER_THRESHOLD']
 
+
 def register_driver(driver_id):
     """
     Creates a new driver entry in redis set ```TAXI_DRIVERS``` and increment ```TAXI_DRIVER_COUNT```
@@ -123,6 +125,7 @@ def register_driver(driver_id):
     from redisutil import redis_connection
     redis_connection.sadd('TAXI_DRIVERS', driver_id)
     redis_connection.incr('TAXI_DRIVER_COUNT')
+
 
 def is_driver_exist(driver_id):
     """

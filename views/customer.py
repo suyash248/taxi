@@ -20,6 +20,5 @@ def ride():
     """
     from services import taxi_service
     customer_id = request.form['customer_id']
-    print "Customer Id", customer_id
     res = taxi_service.ride(customer_id)
     return json_response(res)
